@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AtsPlugin</RootNamespace>
-    <AssemblyName>AtsPlugin</AssemblyName>
+    <AssemblyName>Buzzer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -74,4 +74,7 @@
   <Target Name="DllExportRPkgDynamicImport" BeforeTargets="PostBuildEvent" DependsOnTargets="GetFrameworkPaths" Condition="'$(DllExportModImported)' != 'true' And '$(DllExportRPkgDyn)' != 'false'">
     <MSBuild BuildInParallel="true" UseResultsCache="true" Projects="$(MSBuildProjectFullPath)" Properties="DllExportRPkgDyn=true" Targets="Build" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>copy C:\Users\p4\Documents\BveTs\Scenarios\p4ken\ats\mini\BveAtsPluginCsharpTemplate\bin\Debug\x86\Buzzer.dll C:\Users\p4\Documents\BveTs\Scenarios\p4ken\economy\ats\p4ken</PostBuildEvent>
+  </PropertyGroup>
 </Project>
