@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace AtsPlugin.Core
@@ -18,22 +19,22 @@ namespace AtsPlugin.Core
         /// </summary>
         public enum AtsKey
         {
-            S = 0,          // S Key
-            A1,             // A1 Key
-            A2,             // A2 Key
-            B1,             // B1 Key
-            B2,             // B2 Key
-            C1,             // C1 Key
-            C2,             // C2 Key
-            D,              // D Key
-            E,              // E Key
-            F,              // F Key
-            G,              // G Key
-            H,              // H Key
-            I,              // I Key
-            J,              // J Key
-            K,              // K Key
-            L               // L Key
+            S = 0, // S Key
+            A1, // A1 Key
+            A2, // A2 Key
+            B1, // B1 Key
+            B2, // B2 Key
+            C1, // C1 Key
+            C2, // C2 Key
+            D, // D Key
+            E, // E Key
+            F, // F Key
+            G, // G Key
+            H, // H Key
+            I, // I Key
+            J, // J Key
+            K, // K Key
+            L // L Key
         }
 
         /// <summary>
@@ -41,9 +42,9 @@ namespace AtsPlugin.Core
         /// </summary>
         public enum AtsInitialHandlePosition
         {
-            ServiceBrake = 0,   // Service Brake
-            EmergencyBrake,     // Emergency Brake
-            Removed             // Handle Removed
+            ServiceBrake = 0, // Service Brake
+            EmergencyBrake, // Emergency Brake
+            Removed // Handle Removed
         }
 
         /// <summary>
@@ -51,10 +52,10 @@ namespace AtsPlugin.Core
         /// </summary>
         public static class AtsSoundControlInstruction
         {
-            public const int Stop = -10000;     // Stop
-            public const int Play = 1;          // Play Once
-            public const int PlayLooping = 0;   // Play Repeatedly
-            public const int Continue = 2;      // Continue
+            public const int Stop = -10000; // Stop
+            public const int Play = 1; // Play Once
+            public const int PlayLooping = 0; // Play Repeatedly
+            public const int Continue = 2; // Continue
         }
 
         /// <summary>
@@ -62,9 +63,9 @@ namespace AtsPlugin.Core
         /// </summary>
         public enum AtsHornType
         {
-            Primary = 0,    // Horn 1
-            Secondary,      // Horn 2
-            Music           // Music Horn
+            Primary = 0, // Horn 1
+            Secondary, // Horn 2
+            Music // Music Horn
         }
 
         /// <summary>
@@ -72,9 +73,9 @@ namespace AtsPlugin.Core
         /// </summary>
         public static class AtsCscInstruction
         {
-            public const int Continue = 0;       // Continue
-            public const int Enable = 1;         // Enable
-            public const int Disable = 2;        // Disable
+            public const int Continue = 0; // Continue
+            public const int Enable = 1; // Enable
+            public const int Disable = 2; // Disable
         }
 
         /// <summary>
@@ -83,11 +84,11 @@ namespace AtsPlugin.Core
         [StructLayout(LayoutKind.Sequential)]
         public struct AtsVehicleSpec
         {
-            public int BrakeNotches;   // Number of Brake Notches
-            public int PowerNotches;   // Number of Power Notches
-            public int AtsNotch;       // ATS Cancel Notch
-            public int B67Notch;       // 80% Brake (67 degree)
-            public int Cars;           // Number of Cars
+            public int BrakeNotches; // Number of Brake Notches
+            public int PowerNotches; // Number of Power Notches
+            public int AtsNotch; // ATS Cancel Notch
+            public int B67Notch; // 80% Brake (67 degree)
+            public int Cars; // Number of Cars
         };
 
         /// <summary>
@@ -96,15 +97,15 @@ namespace AtsPlugin.Core
         [StructLayout(LayoutKind.Sequential)]
         public struct AtsVehicleState
         {
-            public double Location;    // Train Position (Z-axis) (m)
-            public float Speed;        // Train Speed (km/h)
-            public int Time;           // Time (ms)
-            public float BcPressure;   // Pressure of Brake Cylinder (Pa)
-            public float MrPressure;   // Pressure of MR (Pa)
-            public float ErPressure;   // Pressure of ER (Pa)
-            public float BpPressure;   // Pressure of BP (Pa)
-            public float SapPressure;  // Pressure of SAP (Pa)
-            public float Current;      // Current (A)
+            public double Location; // Train Position (Z-axis) (m)
+            public float Speed; // Train Speed (km/h)
+            public int Time; // Time (ms)
+            public float BcPressure; // Pressure of Brake Cylinder (Pa)
+            public float MrPressure; // Pressure of MR (Pa)
+            public float ErPressure; // Pressure of ER (Pa)
+            public float BpPressure; // Pressure of BP (Pa)
+            public float SapPressure; // Pressure of SAP (Pa)
+            public float Current; // Current (A)
         };
 
         /// <summary>
@@ -113,10 +114,10 @@ namespace AtsPlugin.Core
         [StructLayout(LayoutKind.Sequential)]
         public struct AtsBeaconData
         {
-            public int Type;       // Type of Beacon
-            public int Signal;     // Signal of Connected Section
+            public int Type; // Type of Beacon
+            public int Signal; // Signal of Connected Section
             public float Distance; // Distance to Connected Section (m)
-            public int Optional;   // Optional Data
+            public int Optional; // Optional Data
         };
 
         /// <summary>
@@ -125,10 +126,10 @@ namespace AtsPlugin.Core
         [StructLayout(LayoutKind.Sequential)]
         public struct AtsHandles
         {
-            public int Brake;               // Brake Notch
-            public int Power;               // Power Notch
-            public int Reverser;            // Reverser Position
-            public int ConstantSpeed;       // Constant Speed Control
+            public int Brake; // Brake Notch
+            public int Power; // Power Notch
+            public int Reverser; // Reverser Position
+            public int ConstantSpeed; // Constant Speed Control
         };
 
         /// <summary>
@@ -157,21 +158,23 @@ namespace AtsPlugin.Core
                 {
                     if ((index >= Length) || (index < 0))
                     {
-                        throw new IndexOutOfRangeException("Unmanaged array index is out of range: " + AppDomain.CurrentDomain.BaseDirectory);
+                        throw new IndexOutOfRangeException("Unmanaged array index is out of range: " +
+                                                           AppDomain.CurrentDomain.BaseDirectory);
                     }
 
-                    var pointer = (int*)Address.ToPointer();
-                    return pointer[index];      // Get an element.
+                    var pointer = (int*) Address.ToPointer();
+                    return pointer[index]; // Get an element.
                 }
                 set
                 {
                     if ((index >= Length) || (index < 0))
                     {
-                        throw new IndexOutOfRangeException("Unmanaged array index is out of range: " + AppDomain.CurrentDomain.BaseDirectory);
+                        throw new IndexOutOfRangeException("Unmanaged array index is out of range: " +
+                                                           AppDomain.CurrentDomain.BaseDirectory);
                     }
 
-                    var pointer = (int*)Address.ToPointer();
-                    pointer[index] = value;     // Set an element.
+                    var pointer = (int*) Address.ToPointer();
+                    pointer[index] = value; // Set an element.
                 }
             }
 
@@ -208,6 +211,7 @@ namespace AtsPlugin.Core
         public static int userPower = 0;
         public static int userBrake = 0;
         public static int userReverser = 0;
+        public static HashSet<AtsKey> userKey = new HashSet<AtsKey>();
 
         /// <summary>
         /// Called when this plug-in is loaded
@@ -215,7 +219,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void Load()
         {
-
         }
 
         /// <summary>
@@ -224,7 +227,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void Dispose()
         {
-
         }
 
         /// <summary>
@@ -256,7 +258,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void Initialize(int initialHandlePosition)
         {
-
         }
 
         /// <summary>
@@ -271,6 +272,13 @@ namespace AtsPlugin.Core
         {
             var panelArray = new AtsIoArray(panel);
             var soundArray = new AtsIoArray(sound);
+
+            // if (!soundInitialized) 要るかも？？
+
+            soundArray[181] // End key
+                = userKey.Contains(AtsKey.B2)
+                    ? AtsSoundControlInstruction.PlayLooping
+                    : AtsSoundControlInstruction.Stop;
 
             return new AtsHandles()
             {
@@ -318,7 +326,8 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void KeyDown(int keyIndex)
         {
-
+            AtsKey atsKey = (AtsKey) keyIndex;
+            userKey.Add(atsKey);
         }
 
         /// <summary>
@@ -328,7 +337,8 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void KeyUp(int keyIndex)
         {
-
+            AtsKey atsKey = (AtsKey) keyIndex;
+            userKey.Remove(atsKey);
         }
 
         /// <summary>
@@ -338,7 +348,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void HornBlow(int hornIndex)
         {
-
         }
 
         /// <summary>
@@ -347,7 +356,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void DoorOpen()
         {
-
         }
 
         /// <summary>
@@ -356,7 +364,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void DoorClose()
         {
-
         }
 
         /// <summary>
@@ -366,7 +373,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void SetSignal(int signalIndex)
         {
-
         }
 
         /// <summary>
@@ -376,7 +382,6 @@ namespace AtsPlugin.Core
         [DllExport(CallingConvention.StdCall)]
         public static void SetBeaconData(AtsBeaconData beaconData)
         {
-
         }
     }
 }
